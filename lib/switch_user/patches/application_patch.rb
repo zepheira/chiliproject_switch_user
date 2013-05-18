@@ -23,7 +23,7 @@ module SwitchUser::Patches::ApplicationPatch
             user
           elsif params[:format] == 'atom' && params[:key] && accept_key_auth_actions.include?(params[:action])
             # RSS key authentication does not start a session
-            User.find_by_rss_key(params[:key].to_s)
+            user = User.find_by_rss_key(params[:key].to_s)
           end
         end
         if user.nil? && Setting.rest_api_enabled? && api_request?
